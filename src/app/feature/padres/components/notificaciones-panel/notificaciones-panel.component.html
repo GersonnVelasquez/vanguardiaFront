@@ -1,0 +1,8 @@
+<h3>Notificaciones</h3>
+<h5>Lista de notificaciones para {{seccion?.asignatura}}</h5>
+
+<div class="d-flex flex-wrap gap-4 flex-column mt-5">
+    <app-anuncio-card *ngFor="let notificacion of seccion?.notificaciones" [notificacion]="notificacion" ></app-anuncio-card>
+</div>
+
+<h1 *ngIf="hayData" class="text-center">Sin notificaciones</h1>

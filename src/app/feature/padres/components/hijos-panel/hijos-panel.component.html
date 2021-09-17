@@ -1,0 +1,11 @@
+<h3>¡Bienvenido {{padre?.nombreCompleto}}!</h3>
+<h5>Seleccione uno de sus hijos para ver las asignaturas</h5>
+
+<div class="d-flex flex-wrap gap-4 justify-content-center justify-content-sm-start mt-5">
+
+    <app-hijo-card *ngFor="let hijo of hijos" [hijo]="hijo" (verAsignaturas)="verAsignaturas($event)"></app-hijo-card>
+
+</div>
+
+
+<h1 *ngIf="hayData" class="text-center">Sin Hijos</h1>

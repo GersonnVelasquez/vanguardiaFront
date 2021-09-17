@@ -1,0 +1,55 @@
+<h3>Alumnos</h3>
+<h5>** Panel Administrador **</h5>
+
+<div class="gap-3 d-flex mt-3">
+  <button type="button" (click)="setOption('Nuevo')" [class.btn-primary]="currrentOption=== 'Nuevo'"
+    class="btn">Nuevo</button>
+  <button type="button" (click)="setOption('Activos')" [class.btn-primary]="currrentOption=== 'Activos'"
+    class="btn">Activos</button>
+</div>
+
+<div class="mt-5" *ngIf="currrentOption=== 'Nuevo'">
+  <form [formGroup]="alumnosForm" class="w-100" style="max-width: 30rem;">
+    <div class="mb-3">
+      <label class="form-label">Numero Cuenta</label>
+      <input formControlName="noCuenta" type="text" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input formControlName="nombre" type="text" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Padre</label>
+      <select formControlName="padre" class="form-select" aria-label="Default select example">
+        <option *ngFor="let padre of padres" [value]="padre.nombreCompleto">{{padre.nombreCompleto}}</option>
+      </select>
+    </div>
+
+    <button [disabled]="alumnosForm.invalid" (click)="agregarAlumno()" type="button"
+      class="btn btn-success w-100 p-2 mt-3">Agregar asignatura</button>
+  </form>
+</div>
+
+<div class="mt-5 d-flex flex-column gap-3" *ngIf="currrentOption=== 'Activos'">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">No. Cuenta</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Padre</th>
+        <th scope="col">Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let alumno of alumnos; let i  = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{alumno.nombre}}</td>
+        <td>{{alumno.noCuenta}}</td>
+        <td>{{alumno.padre}}</td>
+        <td><button (click)="eliminarAlumno(alumno._id)" type="button" class="btn btn-danger">Eliminar</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

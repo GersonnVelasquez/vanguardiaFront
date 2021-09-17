@@ -1,0 +1,95 @@
+<h3>Secciones</h3>
+<h5>** Panel Administrador **</h5>
+
+<div class="gap-3 d-flex mt-3">
+    <button type="button" (click)="setOption('Nuevo')" [class.btn-primary]="currrentOption=== 'Nuevo'"
+        class="btn">Nuevo</button>
+    <button type="button" (click)="setOption('Activos')" [class.btn-primary]="currrentOption=== 'Activos'"
+        class="btn">Activos</button>
+</div>
+
+<div class="mt-5" *ngIf="currrentOption=== 'Nuevo'">
+    <form [formGroup]="seccionesForm" class="w-100">
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="mb-3">
+                    <label class="form-label">Numero</label>
+                    <input formControlName="numero" type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Asignatura</label>
+                    <select formControlName="asignatura" class="form-select" aria-label="Default select example">
+                        <option *ngFor="let asignatura of asignaturas" [value]="asignatura.nombre">{{asignatura.nombre}}
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Docente</label>
+                    <select formControlName="docente" class="form-select" aria-label="Default select example">
+                        <option *ngFor="let docente of docentes" [value]="docente.nombreCompleto">
+                            {{docente.nombreCompleto}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <label class="form-label">Alumnos</label>
+                <div class="input-group mb-3">
+                    <input [formControl]="alumno" list="alumnos" type="text" class="form-control">
+                    <button (click)="agregarAlumnoAgregado()" [disabled]="alumno.invalid" type="button"
+                        class="btn btn-primary">Agregar</button>
+                </div>
+
+                <ul class="list-group">
+                    <li *ngFor="let alumnoAgregado of alumnosAgregados"
+                        class="list-group-item d-flex justify-content-between align-items-center">
+                        {{alumnoAgregado}}
+                        <button (click)="eliminarAlumnoAgregado(alumnoAgregado)" type="button"
+                            class="badge btn btn-danger">Eliminar</button>
+                    </li>
+                </ul>
+
+                <datalist id="alumnos">
+                    <option *ngFor="let alumno of alumnos" [value]="alumno.nombre">
+                </datalist>
+            </div>
+
+        </div>
+
+        <button (click)="agregarSeccion()" [disabled]="seccionesForm.invalid" style="max-width: 30rem;" type="button"
+            class="btn btn-success w-100 p-2 mt-3">
+            Agregar Seccion</button>
+    </form>
+</div>
+
+<div class="mt-5 d-flex flex-column gap-3" *ngIf="currrentOption=== 'Activos'">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Numero</th>
+                <th scope="col">Asignatura</th>
+                <th scope="col">Docente</th>
+                <th scope="col">Alumnos</th>
+                <th scope="col">Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let seccion of secciones; let i = index">
+                <th scope="row">{{i + 1}}</th>
+                <td>{{seccion.numero}}</td>
+                <td>{{seccion.asignatura}}</td>
+                <td>{{seccion.docente}}</td>
+                <td>{{seccion.alumnos.length}}</td>
+                <td class="d-flex gap-3"><button  (click)="modificarSeccion(seccion)" type="button"
+                        class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">+ / -
+                        Alumnos</button><button (click)="eliminarSeccion(seccion._id)" type="button" class="btn btn-danger">Eliminar</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<app-alumnos-secciones-modal [alumnos]="alumnos" [seccion]="seccionSeleccionada" (updateSeccion)="updateSeccion($event)"></app-alumnos-secciones-modal>

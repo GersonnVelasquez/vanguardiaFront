@@ -1,0 +1,41 @@
+<h3>Asignaturas</h3>
+<h5>** Panel Administrador **</h5>
+
+<div class="gap-3 d-flex mt-3">
+  <button type="button" (click)="setOption('Nuevo')" [class.btn-primary]="currrentOption=== 'Nuevo'"
+    class="btn">Nuevo</button>
+  <button type="button" (click)="setOption('Activos')" [class.btn-primary]="currrentOption=== 'Activos'"
+    class="btn">Activos</button>
+</div>
+
+<div class="mt-5" *ngIf="currrentOption=== 'Nuevo'">
+  <form [formGroup]="asignaturasForm" class="w-100" style="max-width: 30rem;">
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input formControlName="nombre" type="text" class="form-control">
+    </div>
+    <button [disabled]="asignaturasForm.invalid" (click)="agregarAsignatura()" type="button"
+      class="btn btn-success w-100 p-2 mt-3">Agregar asignatura</button>
+  </form>
+</div>
+
+<div class="mt-5 d-flex flex-column gap-3" *ngIf="currrentOption=== 'Activos'">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let asignatura of asignaturas; let i =  index">
+        <th scope="row">{{i +1}}</th>
+        <td>{{asignatura.nombre}}</td>
+        <td><button (click)="eliminarAsignatura(asignatura._id)" type="button" class="btn btn-danger">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

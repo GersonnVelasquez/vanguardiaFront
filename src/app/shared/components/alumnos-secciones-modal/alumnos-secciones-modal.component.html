@@ -1,0 +1,52 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Alumnos {{seccion?.asignatura}} Seccion {{seccion?.numero}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="gap-3 d-flex mt-3">
+          <button type="button" (click)="setOption('Nuevo')" [class.btn-primary]="currrentOption=== 'Nuevo'"
+            class="btn">Nuevo</button>
+          <button type="button" (click)="setOption('Activos')" [class.btn-primary]="currrentOption=== 'Activos'"
+            class="btn">Activos</button>
+        </div>
+
+        <div class="mt-5" *ngIf="currrentOption=== 'Nuevo'">
+          <form [formGroup]="alumnosForm" class="w-100" style="max-width: 30rem;">
+            <div class="mb-3">
+              <label class="form-label">Alumnos</label>
+              <input formControlName="nombre" list="alumnosModal" type="text" class="form-control">
+            </div>
+            <datalist id="alumnosModal">
+              <option *ngFor="let alumno of alumnos" [value]="alumno.nombre">
+            </datalist>
+            <button (click)="agregarAlumnoAgregado()" [disabled]="alumnosForm.invalid" type="button" class="btn btn-success w-100 p-2 mt-3">Agregar alumno</button>
+          </form>
+        </div>
+
+        <div class="mt-5 d-flex flex-column gap-3" *ngIf="currrentOption=== 'Activos'">
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let alumno of seccion?.alumnos; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{alumno}}</td>
+                <td><button (click)="eliminarAlumnoAgregado(alumno)" type="button" class="btn btn-danger">Eliminar</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

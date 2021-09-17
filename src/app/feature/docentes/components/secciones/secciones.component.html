@@ -1,0 +1,7 @@
+<h3>¡Bienvenido {{docente.nombreCompleto}}!</h3>
+<h5>Seleccione una seccion para administrar las notificaciones</h5>
+
+<div class="d-flex flex-wrap gap-4 justify-content-center justify-content-sm-between mt-5">
+    <app-seccion-card *ngFor="let seccion of secciones" [seccion]="seccion" (verNotificaciones)="verNotificaciones($event)"></app-seccion-card>
+
+</div> 

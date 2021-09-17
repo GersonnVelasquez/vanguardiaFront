@@ -1,0 +1,11 @@
+<div class="card" style="width: 15rem;">
+    <div class="card-header">
+      {{seccion?.asignatura}}
+    </div>
+    <div class="card-body">
+      <p class="card-text"><strong>Seccion:</strong> {{seccion?.numero}}</p>
+      <p class="card-text"><strong>Alumnos:</strong> {{seccion?.alumnos?.length}}</p>
+      <p class="card-text"><strong>Notificaciones:</strong> {{seccion?.notificaciones?.length}}</p>
+      <button (click)="emitVerNotificaciones(seccion?._id)" class="btn btn-success mt-3">Ver Anuncios</button>
+    </div>
+  </div>

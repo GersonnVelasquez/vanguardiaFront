@@ -1,0 +1,10 @@
+<div class="card" style="width: 100%;">
+    <div class="card-header">
+        {{notificacion?.titulo}}
+    </div>
+    <div class="card-body">
+        <p class="card-text">{{notificacion?.descripcion}}</p>
+        <button (click)="eliminar()" *ngIf="showDeleteButton" type="button" class="btn btn-danger">Eliminar</button>
+        <span class="date">{{notificacion?.fecha | date: 'dd/MM/yyyy hh:mm a'}}</span>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+<nav *ngIf="authServices.isSessionActive" class="navbar navbar-dark bg-dark">
+    <div class="container-fluid px-5 ">
+        <a class="navbar-brand" href="#">Sistema de notificaciones</a>
+        <button (click)="logout()" type="button" class="btn btn-outline-primary">Salir</button>
+    </div>
+</nav>

@@ -1,0 +1,69 @@
+<h3>Docentes</h3>
+<h5>** Panel Administrador **</h5>
+
+<div class="gap-3 d-flex mt-3">
+    <button type="button" (click)="setOption('Nuevo')" [class.btn-primary]="currrentOption=== 'Nuevo'"
+        class="btn">Nuevo</button>
+    <button type="button" (click)="setOption('Activos')" [class.btn-primary]="currrentOption=== 'Activos'"
+        class="btn">Activos</button>
+</div>
+
+<div class="mt-5" *ngIf="currrentOption=== 'Nuevo'">
+    <form [formGroup]="docentesForm" class="w-100">
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="mb-3">
+                    <label class="form-label">Numero Cedula</label>
+                    <input formControlName="numeroCedula" type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Nombre</label>
+                    <input formControlName="nombreCompleto" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="mb-3">
+                    <label class="form-label">Usuario</label>
+                    <input formControlName="usuario" type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Contraseña</label>
+                    <input formControlName="password" type="text" class="form-control">
+                </div>
+            </div>
+
+        </div>
+
+        <button [disabled]="docentesForm.invalid" (click)="agregarDocente()" style="max-width: 30rem;" type="button"
+            class="btn btn-success w-100 p-2 mt-3">
+            Agregar docente</button>
+    </form>
+</div>
+
+<div class="mt-5 d-flex flex-column gap-3" *ngIf="currrentOption=== 'Activos'">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Numero Cedula</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Contraseña</th>
+                <th scope="col">Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let docente of docentes; let i = index">
+                <th scope="row">{{i +1}}</th>
+                <td>{{docente.numeroCedula}}</td>
+                <td>{{docente.nombreCompleto}}</td>
+                <td>{{docente.usuario}}</td>
+                <td>{{docente.password}}</td>
+                <td><button (click)="eliminarDocente(docente._id)" type="button"
+                        class="btn btn-danger">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

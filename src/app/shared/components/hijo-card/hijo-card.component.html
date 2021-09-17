@@ -1,0 +1,9 @@
+<div class="card" style="width: 15rem;">
+  <div class="card-header">
+    {{hijo?.nombre}}
+  </div>
+  <div class="card-body">
+    <p class="card-text"><strong>No. Cuenta:</strong> {{hijo?.noCuenta}}</p>
+    <button (click)="emitVerAsignaturas(hijo.nombre)" class="btn btn-success mt-3">Ver Asignaturas</button>
+  </div>
+</div>
