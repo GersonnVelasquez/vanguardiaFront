@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'http://localhost:3900/'
+  backendUrl: 'https://vangbackend.herokuapp.com/'
 };
 
 /*
